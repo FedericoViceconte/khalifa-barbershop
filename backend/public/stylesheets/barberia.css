@@ -1,0 +1,170 @@
+body {
+font-family: 'Roboto Mono', monospace;
+color: rgb(255, 255, 255);
+    font-size: 1.2rem;
+    line-height: 1.6em;
+    margin: 0%;
+    background: linear-gradient(to bottom, #323232 0%, #3F3F3F 40%, #1C1C1C 150%), linear-gradient(to top, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.25) 200%);
+ background-blend-mode: multiply;
+ display: flex;
+ flex-direction: column;
+ min-height: 100vh;
+
+}
+
+h1 {
+    font-size: 2rem;
+    line-height: 1.3em;
+    text-align: center;
+    text-decoration: underline;
+    padding: 10%;
+}
+
+
+
+p {
+    margin-bottom: 1.6em;
+
+}
+
+/*CABECERA FIJA*/
+.header {
+background-image: linear-gradient(-225deg, #AC32E4 0%, #48187ce5 48%, #000000e5 100%);
+color: white;
+padding: 2rem 0;
+text-align: center;
+position: fixed;
+left: 0;
+top: 0;
+width: 100%;
+z-index: 200;
+}
+.header a {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+
+}
+
+/*.logo-nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+  }*/
+
+.logo {
+    letter-spacing: 5px;
+    font-size: 1.3em;
+
+}
+
+
+
+/*SERVICIOS*/
+.servicios_titulo{
+    text-align: center;
+    padding-top: 2rem;
+   }
+
+.servicios{
+    text-align: center;
+    background-color: #DCD9D4;
+ background-image: linear-gradient(to bottom, rgba(255,255,255,0.50) 0%, rgba(0,0,0,0.50) 100%), radial-gradient(at 50% 0%, rgba(255,255,255,0.10) 0%, rgba(0,0,0,0.50) 50%);
+ background-blend-mode: soft-light,screen;
+    padding-bottom: 2rem;
+    color: #323232;
+    font-size: 1.2rem;
+}
+
+/*NOVEDADES*/
+.novedades_titulo{
+  text-align: center;
+  padding-top: 2rem;
+ }
+
+.novedades {
+  text-align: center;
+  padding-bottom: 2rem;
+  font-size: 1.2rem;
+}
+
+
+/*FORMULARIO*/
+.container-form{
+  width: 100%;
+  max-width: 1100px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  grid-gap: 50px;
+  margin-top: 90px;
+}
+.container-form h2{
+  margin-bottom: 15px;
+  font-size: 35px;
+}
+.container-form p{
+  font-size: 17px;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+.container-form  a{
+  font-size: 17px;
+  display: inline-block;
+  text-decoration: none;
+  width: 100%;
+  margin-bottom: 15px;
+  color: white;
+  font-weight: 700;
+}
+.container-form i{
+  color: #AC32E4;
+  margin-right: 10px;
+}
+.container-form .campo, textarea{
+  width: 100%;
+  padding: 15px 10px;
+  font-size: 15px;
+  border: 1px solid;
+  margin-bottom: 20px;
+  border-radius: 3px;
+  outline: 0px;
+}
+.container-form form textarea{
+  max-width: 530px;
+  min-width: 530px;
+  min-height: 140px;
+  max-height: 150px;
+}
+.container-form .btn-enviar{
+  padding: 15px;
+  font-size: 16px;
+  border: none;
+  outline: 0px;
+  background: #AC32E4;
+  color: white;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 300ms ease;
+}
+.container-form .btn-enviar{
+  background: vAC32E4;
+}
+
+
+/*FOOTER*/
+.footer {
+    background-image: linear-gradient(-225deg, #000000e5 0%, #48187ce5 48%, #AC32E4 100%);
+    padding: 4rem 0;
+    text-align: center;
+    margin-top: auto;
+
+}
+.footer  p {
+    color: white
+
+}
+
+.main {
+    padding-top: 10rem;
+}

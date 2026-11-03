@@ -1,0 +1,20 @@
+require('dotenv').config();
+const pool = require('../models/bd');
+const { hashPassword } = require('../models/usuariosModel');
+
+async function main() {
+  const user = process.argv[2];
+  const password = process.env.ADMIN_PASSWORD;
+  if (!user || user.length > 80 || !password || password.length < 12 || password.length > 256) {
+    throw new Error('Indicá un usuario y una variable ADMIN_PASSWORD de entre 12 y 256 caracteres.');
+  }
+  await pool.execute('INSERT INTO usuarios (usuario, password) VALUES (?, ?)', [
+    user, await hashPassword(password)
+  ]);
+  console.log('Administrador creado.');
+}
+
+main().catch((error) => {
+  console.error(error.code || error.message);
+  process.exitCode = 1;
+}).finally(() => pool.end());

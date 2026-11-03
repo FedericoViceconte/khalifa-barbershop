@@ -1,0 +1,367 @@
+body {
+  font-family: 'Roboto Mono', monospace;
+  color: rgb(255, 255, 255);
+      font-size: 1.5rem;
+      line-height: 1.8em;
+      margin: 0%;
+      background: linear-gradient(to bottom, #323232 0%, #3F3F3F 40%, #1C1C1C 150%), linear-gradient(to top, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.25) 200%);
+   background-blend-mode: multiply;
+   display: flex;
+   flex-direction: column;
+   min-height: 100vh;
+
+  }
+
+  h1 {
+      font-size: 2rem;
+      line-height: 1.3em;
+      text-align: center;
+      text-decoration: underline;
+  }
+
+
+
+  p {
+      margin-bottom: 1.6em;
+
+  }
+    /*TIENDA*/
+    .shop{
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      padding: 50px 0;
+      box-sizing: border-box;
+
+    }
+    .shop h2{
+      width: 100%;
+      color: #999;
+      font-family: monospace;
+
+    }
+    .card{
+      width: 33.333333%;
+
+    }
+    .estilo-c{
+      font-family: sans-serif;
+      width: 30%;
+
+    }
+    .estilo-c .img-container{
+      overflow: hidden;
+      height: 250px;
+      position: relative;
+      border-radius: 15px;
+
+
+    }
+    .estilo-c .img-container img{
+      width: 105%;
+      position: absolute;
+      top: -60%;
+      transition: all 0.5s;
+
+
+    }
+    .estilo-c:hover .img-container img{
+      transform: scale(1.2);
+
+
+    }
+    .estilo-c .img-container .promo{
+      position: absolute;
+      top: 10px;
+      left: 0;
+      font-size: 20px;
+      background: yellow;
+      padding: 15px;
+      color: black;
+      border-bottom-right-radius: 25px;
+      border-top-right-radius: 25px;
+
+    }
+    .estilo-c .info-container{
+      display: flex;
+      flex-wrap: wrap;
+      text-align: center;
+      justify-content: center;
+
+    }
+    .estilo-c .info-container h3{
+      margin: 0;
+
+    }
+    .estilo-c .info-container h3,
+    .estilo-c .info-container strong,
+    .estilo-c .info-container span{
+      padding: 5px 15px;
+      width: 100%;
+
+    }
+    .estilo-c .add-cart{
+      margin-top: 2px;
+      text-decoration: none;
+      color: white;
+      background-color: black;
+      padding: 15px;
+      border: 1px solid black;
+      border-radius: 25px;
+
+    }
+    .estilo-c .add-cart:hover{
+      color: black;
+      background-color: transparent;
+      border: 1px solid black;
+
+    }
+
+  /*IMAGEN INICIO*/
+
+  .barberia img {
+      float: left;
+      border-radius: 0%;
+      padding-right: 2%;
+
+
+  }
+  .container-slider {
+  margin: auto;
+  background-color: white;
+  width: 800px;
+  padding: 30px;
+  }
+
+  .container {
+      width: 95%;
+      max-width: 950px;
+      margin: 0 auto;
+
+  }
+
+  /*MAPA*/
+  .mapa {
+      margin-top: 5px;
+      margin-bottom: 1px;
+
+  }
+
+  /*CABECERA FIJA*/
+  .header {
+  background-image: linear-gradient(-225deg, #AC32E4 0%, #48187ce5 48%, #000000e5 100%);
+  color: white;
+  padding: 2rem 0;
+
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 200;
+  }
+  .header a {
+      color: rgb(255, 255, 255);
+      text-decoration: none;
+  }
+
+  .navigation ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+}
+.navigation ul li {
+    display: inline-block;
+}
+.navigation ul li a {
+    display: block;
+    padding: 0.5rem 1rem;
+    transition: all 0.4s linear;
+    border-radius: 45px;
+}
+
+.navigation ul li a:hover{
+    background: rgb(68, 1, 68);
+
+}
+  .logo-nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+  }
+  .logo {
+      letter-spacing: 5px;
+      font-size: 1.3em;
+
+  }
+
+  /*GALERIA*/
+
+  ul.slider {
+
+      position: relative;
+      width: 800px;
+      height: 600px;
+  }
+
+  ul.slider li{
+      position: absolute;
+      left: 0;
+      top: 0;
+      opacity: 0;
+      width: inherit;
+      height: inherit;
+      background-color: white;
+      transition: opacity .5s;
+  }
+  ul.slider li img {
+      width: 100%;
+      height: 590px;
+      object-fit: cover;
+  }
+  ul.slider li:first-child {
+      opacity: 1;
+  }
+
+  ul.slider li:target{
+    opacity: 1;
+  }
+
+  ul, li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+
+  .menu{
+      text-align: center;
+      margin: 20px;
+  }
+
+  .menu li{
+      display: inline-block;
+      text-align: center;
+  }
+
+  .menu li a{
+      display: inline-block;
+      color: white;
+      text-decoration: none;
+      background-color: grey;
+      padding: 10px;
+      width: 20px;
+      height: 20px;
+      font-size: 20px;
+      border-radius: 100%;
+  }
+
+  /*SERVICIOS*/
+  .servicios_titulo{
+      text-align: center;
+      padding-top: 2rem;
+     }
+
+  .servicios{
+      text-align: center;
+      background-color: #DCD9D4;
+   background-image: linear-gradient(to bottom, rgba(255,255,255,0.50) 0%, rgba(0,0,0,0.50) 100%), radial-gradient(at 50% 0%, rgba(255,255,255,0.10) 0%, rgba(0,0,0,0.50) 50%);
+   background-blend-mode: soft-light,screen;
+      padding-bottom: 2rem;
+      color: #323232;
+      font-size: 1.2rem;
+  }
+
+  /*NOVEDADES*/
+  .novedades_titulo{
+    text-align: center;
+    padding-top: 2rem;
+   }
+
+  .novedades {
+    text-align: center;
+    padding-bottom: 2rem;
+    font-size: 1.2rem;
+  }
+
+
+  /*FORMULARIO*/
+  .container-form{
+    width: 100%;
+    max-width: 900px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-gap: 50px;
+    margin-top: 90px;
+  }
+  .container-form h2{
+    margin-bottom: 15px;
+    font-size: 35px;
+  }
+  .container-form p{
+    font-size: 17px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+  }
+  .container-form  a{
+    font-size: 17px;
+    display: inline-block;
+    text-decoration: none;
+    width: 100%;
+    margin-bottom: 15px;
+    color: white;
+    font-weight: 700;
+  }
+  .container-form i{
+    color: #AC32E4;
+    margin-right: 10px;
+  }
+  .container-form .campo, textarea{
+    width: 98%;
+    padding: 15px 10px;
+    font-size: 15px;
+    border: 1px solid;
+    margin-bottom: 20px;
+    border-radius: 3px;
+    outline: 0px;
+  }
+  .container-form form textarea{
+    max-width: 530px;
+    min-width: 530px;
+    min-height: 140px;
+    max-height: 150px;
+  }
+  .container-form .btn-enviar{
+    padding: 15px;
+    font-size: 16px;
+    border: none;
+    outline: 0px;
+    background: #AC32E4;
+    color: white;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 300ms ease;
+  }
+  .container-form .btn-enviar{
+    background: vAC32E4;
+  }
+
+
+  /*FOOTER*/
+  .footer {
+      background-image: linear-gradient(-225deg, #000000e5 0%, #48187ce5 48%, #AC32E4 100%);
+      padding: 4rem 0;
+      text-align: center;
+      margin-top: auto;
+
+  }
+  .footer  p {
+      color: white
+
+  }
+
+  .main {
+      padding-top: 10rem;
+  }
