@@ -451,6 +451,23 @@ ul.slider:has(li:target) li:first-child:not(:target) {
   min-height: 1.6em;
 }
 
+/* AVISO DE DEMO */
+.aviso-demo {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 300;
+  max-width: 320px;
+  margin: 0;
+  padding: 0.6rem 0.9rem;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  color: black;
+  background: yellow;
+  border-radius: 10px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+}
+
 /* PÁGINA NO ENCONTRADA */
 .no-encontrada {
   text-align: center;

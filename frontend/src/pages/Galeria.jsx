@@ -1,7 +1,9 @@
+import { asset } from '../asset';
+
 const fotos = [
-  ['/img/sillon.png', 'Sillón de barbería'],
-  ['/img/espejo.png', 'Espejo de barbería'],
-  ['/img/tijeraa.png', 'Tijera profesional']
+  [asset('img/sillon.png'), 'Sillón de barbería'],
+  [asset('img/espejo.png'), 'Espejo de barbería'],
+  [asset('img/tijeraa.png'), 'Tijera profesional']
 ];
 
 const Galeria = () => {

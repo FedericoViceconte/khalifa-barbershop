@@ -1,0 +1,56 @@
+# Publishes the frontend as a demo without a backend on GitHub Pages after each push to main.
+name: Demo en GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - name: Instalar dependencias
+        run: npm ci
+        working-directory: frontend
+      - name: Pruebas
+        run: npm test
+        working-directory: frontend
+      - name: Compilar la demo
+        run: npx vite build --outDir ../.demo-build --emptyOutDir
+        working-directory: frontend
+        env:
+          VITE_DEMO: 'true'
+          DEMO_BASE: /khalifa-barbershop/
+      # GitHub Pages serves 404.html for unknown paths, so direct links to a section still load the app.
+      - name: Rutas directas
+        run: cp .demo-build/index.html .demo-build/404.html
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .demo-build
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

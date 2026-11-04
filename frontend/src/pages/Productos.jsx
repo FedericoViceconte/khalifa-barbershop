@@ -1,12 +1,13 @@
 import { Link } from 'react-router-dom';
+import { asset } from '../asset';
 
 export const productos = [
-  { nombre: 'Patillera Babyliss', imagen: '/img/patillera.png', precio: 20000, descuento: 25, estrellas: 4 },
-  { nombre: 'Espejo de barbería', imagen: '/img/espejo.png', precio: 3080, descuento: 15, estrellas: 3 },
-  { nombre: 'Tijera profesional', imagen: '/img/tijeraa.png', precio: 5820, descuento: 36, estrellas: 5 },
-  { nombre: 'Sillón de barbería', imagen: '/img/sillon.png', precio: 60700, descuento: 45, estrellas: 4 },
-  { nombre: 'Secador de pelo', imagen: '/img/secador.png', precio: 4950, descuento: 10, estrellas: 3 },
-  { nombre: 'Set de barbero profesional', imagen: '/img/set.png', precio: 2120, descuento: 30, estrellas: 5 }
+  { nombre: 'Patillera Babyliss', imagen: asset('img/patillera.png'), precio: 20000, descuento: 25, estrellas: 4 },
+  { nombre: 'Espejo de barbería', imagen: asset('img/espejo.png'), precio: 3080, descuento: 15, estrellas: 3 },
+  { nombre: 'Tijera profesional', imagen: asset('img/tijeraa.png'), precio: 5820, descuento: 36, estrellas: 5 },
+  { nombre: 'Sillón de barbería', imagen: asset('img/sillon.png'), precio: 60700, descuento: 45, estrellas: 4 },
+  { nombre: 'Secador de pelo', imagen: asset('img/secador.png'), precio: 4950, descuento: 10, estrellas: 3 },
+  { nombre: 'Set de barbero profesional', imagen: asset('img/set.png'), precio: 2120, descuento: 30, estrellas: 5 }
 ];
 
 const pesos = new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS', maximumFractionDigits: 0 });

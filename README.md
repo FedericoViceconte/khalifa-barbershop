@@ -11,7 +11,9 @@
 ![Node.js](https://img.shields.io/badge/Node.js-22.12+-339933?logo=nodedotjs&logoColor=white)
 ![Express](https://img.shields.io/badge/Express-4-000000?logo=express&logoColor=white)
 ![MySQL](https://img.shields.io/badge/MySQL-4479A1?logo=mysql&logoColor=white)
-![Pruebas](https://img.shields.io/badge/pruebas-10_aprobadas-2ea44f)
+![Pruebas](https://img.shields.io/badge/pruebas-11_aprobadas-2ea44f)
+
+### [▶ Ver la demo en vivo](https://federicoviceconte5-jpg.github.io/khalifa-barbershop/)
 
 <img src="docs/img/inicio.png" alt="Página de inicio de Khalifa Barbershop" width="860">
 
@@ -20,6 +22,7 @@
 ## Índice
 
 - [Sobre el proyecto](#sobre-el-proyecto)
+- [Demo en vivo](#demo-en-vivo)
 - [Capturas](#capturas)
 - [Funciones](#funciones)
 - [Stack](#stack)
@@ -40,6 +43,22 @@ subida de imágenes.
 
 El frontend es una aplicación de una sola página en React, y el backend en Express sirve la API,
 el panel y la versión compilada del sitio.
+
+## Demo en vivo
+
+**[https://federicoviceconte5-jpg.github.io/khalifa-barbershop/](https://federicoviceconte5-jpg.github.io/khalifa-barbershop/)**
+
+La demo publica solo el frontend en GitHub Pages, sin backend: las novedades son de ejemplo y el
+formulario de contacto no envía correos, como indica un aviso en pantalla. Se actualiza sola en cada
+cambio de `main` mediante GitHub Actions (`.github/workflows/pages.yml`), después de pasar las
+pruebas del frontend.
+
+Para generarla en local:
+
+```sh
+cd frontend
+DEMO_BASE=/khalifa-barbershop/ VITE_DEMO=true npx vite build --outDir ../.demo-build
+```
 
 ## Capturas
 
@@ -170,7 +189,7 @@ las sesiones se guardan en memoria.
 ## Pruebas
 
 ```sh
-npm --prefix frontend test   # 5 pruebas: rutas, menú, productos, contacto y página 404
+npm --prefix frontend test   # 6 pruebas: rutas, menú, productos, contacto, modo demo y página 404
 npm --prefix backend test    # 5 pruebas: validación, modo demostración, protección del panel y CSRF
 ```
 

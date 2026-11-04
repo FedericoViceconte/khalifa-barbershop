@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import axios from 'axios';
+import { enviarContacto } from '../api';
 
 const initialForm = { nombre: '', email: '', mensaje: '' };
 
@@ -18,8 +18,7 @@ const Contacto = () => {
     setMsg('');
     setSending(true);
     try {
-      const response = await axios.post('/api/contacto', formData);
-      setMsg(response.data.message);
+      setMsg((await enviarContacto(formData)).message);
       setFormData(initialForm);
     } catch (error) {
       setMsg(error.response?.data?.message || 'No se pudo enviar el mensaje.');

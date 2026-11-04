@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 import NovedadItem from '../components/novedades/NovedadItem';
+import { getNovedades } from '../api';
+import { asset } from '../asset';
 
 const servicios = [
-  ['/img/silla.png', 'Corte de cabello', 'Corte de cabello premium con terminaciones a navaja.'],
-  ['/img/tijera.png', 'Arreglo de barba', 'Arreglo de barba con fomento caliente y frío. Terminaciones a navaja y productos para el cuidado de tu piel y barba.'],
-  ['/img/afeitado.png', 'Afeitado italiano (clásico)', 'Afeitado italiano con dos toallas calientes, una fría, aceites aromáticos y productos para el cuidado de la piel.']
+  [asset('img/silla.png'), 'Corte de cabello', 'Corte de cabello premium con terminaciones a navaja.'],
+  [asset('img/tijera.png'), 'Arreglo de barba', 'Arreglo de barba con fomento caliente y frío. Terminaciones a navaja y productos para el cuidado de tu piel y barba.'],
+  [asset('img/afeitado.png'), 'Afeitado italiano (clásico)', 'Afeitado italiano con dos toallas calientes, una fría, aceites aromáticos y productos para el cuidado de la piel.']
 ];
 
 const Inicio = () => {
@@ -17,8 +18,7 @@ const Inicio = () => {
     const cargarNovedades = async () => {
       setLoading(true);
       try {
-        const response = await axios.get('/api/novedades');
-        setNovedades(response.data);
+        setNovedades(await getNovedades());
       } catch {
         setError(true);
       } finally {
@@ -34,7 +34,7 @@ const Inicio = () => {
       <div className="container">
         <section className="barberia">
           <h1>LA BARBERÍA</h1>
-          <img src="/img/logo.png" alt="Logo de Khalifa Barbershop" width="180" height="180" />
+          <img src={asset('img/logo.png')} alt="Logo de Khalifa Barbershop" width="180" height="180" />
           <p>
             Khalifa Barbershop abrió sus puertas el 26 de junio de 2021. Desde entonces su concepto fue
             cambiando año tras año, y hoy se destaca como peluquería y barbería clásica, inspirada en los

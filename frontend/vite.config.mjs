@@ -1,7 +1,9 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
+// DEMO_BASE publishes the frontend in a subfolder, such as /khalifa-barbershop/ on GitHub Pages.
 export default defineConfig({
+  base: process.env.DEMO_BASE || '/',
   plugins: [react()],
   build: { outDir: 'build' },
   server: {
