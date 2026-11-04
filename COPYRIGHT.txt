@@ -1,0 +1,13 @@
+Khalifa Barbershop
+© 2026 Federico Viceconte. Todos los derechos reservados.
+
+Proyecto académico full stack.
+Titular de los derechos de autor del proyecto: Federico Viceconte.
+
+Este aviso se aplica al código, el diseño y la documentación originales del
+proyecto en la medida en que sean susceptibles de protección por derechos de
+autor. Las bibliotecas, fuentes, íconos e imágenes de terceros conservan sus
+licencias y derechos. Consultar LICENCIAS.txt.
+
+No se concede una licencia general para redistribuir, vender o modificar el
+proyecto. Cualquier autorización adicional debe solicitarse a Federico Viceconte.

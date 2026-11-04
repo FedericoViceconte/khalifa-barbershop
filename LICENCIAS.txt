@@ -1,0 +1,38 @@
+Khalifa Barbershop — componentes de terceros
+
+© 2026 Federico Viceconte. Todos los derechos reservados.
+El aviso COPYRIGHT.txt detalla los derechos del contenido original.
+
+El repositorio no incluye node_modules. Las dependencias se instalan con npm y
+conservan sus licencias; después de instalarlas, cada texto está en
+node_modules/<paquete>/LICENSE.
+
+Frontend (frontend/):
+
+- React y React DOM 18: MIT. https://github.com/facebook/react
+- React Router: MIT. https://github.com/remix-run/react-router
+- axios: MIT. https://github.com/axios/axios
+- Vite y @vitejs/plugin-react: MIT. https://github.com/vitejs/vite
+- Para pruebas: Vitest (MIT), jsdom (MIT), Testing Library DOM y React (MIT).
+
+Backend y panel de administración (backend/):
+
+- Express, express-session, express-fileupload, cookie-parser, morgan,
+  http-errors y debug: MIT. https://github.com/expressjs
+- express-handlebars: BSD-3-Clause. https://github.com/express-handlebars/express-handlebars
+- mysql2: MIT. https://github.com/sidorares/node-mysql2
+- dotenv: BSD-2-Clause. https://github.com/motdotla/dotenv
+- Nodemailer: MIT-0. https://github.com/nodemailer/nodemailer
+- Cloudinary Node SDK: MIT. https://github.com/cloudinary/cloudinary_npm
+
+Recursos que el panel de administración carga desde internet:
+
+- Bootstrap 5.1.3: MIT. https://getbootstrap.com
+- Font Awesome 6.1.1 Free: íconos CC BY 4.0, fuentes SIL OFL 1.1 y código MIT.
+  https://fontawesome.com/license/free
+- Roboto Mono, mediante Google Fonts: Apache License 2.0.
+  https://fonts.google.com/specimen/Roboto+Mono
+
+Los íconos e imágenes de terceros incluidos en el repositorio conservan los
+derechos de sus autores y no forman parte del contenido original cubierto por
+COPYRIGHT.txt.

@@ -35,3 +35,7 @@ El formulario devuelve una respuesta de demostración mientras SMTP esté sin co
 Con el backend en el puerto 3000, ejecutá `npm --prefix frontend start` para abrir la vista previa con recarga en vivo en el puerto 3001. El proxy de desarrollo reenvía `/api` al backend. Para correr la prueba del frontend, usá `npm --prefix frontend test`.
 
 La configuración documentada es para una demo local. El servidor escucha en la interfaz local por defecto y las sesiones se guardan en memoria.
+
+## Licencia
+
+© 2026 Federico Viceconte. Todos los derechos reservados: ver [COPYRIGHT.txt](COPYRIGHT.txt). Las bibliotecas, fuentes e íconos de terceros conservan sus licencias, detalladas en [LICENCIAS.txt](LICENCIAS.txt).
