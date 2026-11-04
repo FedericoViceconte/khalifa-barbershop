@@ -11,10 +11,10 @@
 ![Node.js](https://img.shields.io/badge/Node.js-22.12+-339933?logo=nodedotjs&logoColor=white)
 ![Express](https://img.shields.io/badge/Express-4-000000?logo=express&logoColor=white)
 ![MySQL](https://img.shields.io/badge/MySQL-4479A1?logo=mysql&logoColor=white)
-[![Pruebas](https://github.com/federicoviceconte5-jpg/khalifa-barbershop/actions/workflows/ci.yml/badge.svg)](https://github.com/federicoviceconte5-jpg/khalifa-barbershop/actions/workflows/ci.yml)
-[![Demo](https://github.com/federicoviceconte5-jpg/khalifa-barbershop/actions/workflows/pages.yml/badge.svg)](https://github.com/federicoviceconte5-jpg/khalifa-barbershop/actions/workflows/pages.yml)
+[![Pruebas](https://github.com/FedericoViceconte/khalifa-barbershop/actions/workflows/ci.yml/badge.svg)](https://github.com/FedericoViceconte/khalifa-barbershop/actions/workflows/ci.yml)
+[![Demo](https://github.com/FedericoViceconte/khalifa-barbershop/actions/workflows/pages.yml/badge.svg)](https://github.com/FedericoViceconte/khalifa-barbershop/actions/workflows/pages.yml)
 
-### [▶ Ver la demo en vivo](https://federicoviceconte5-jpg.github.io/khalifa-barbershop/)
+### [▶ Ver la demo en vivo](https://federicoviceconte.github.io/khalifa-barbershop/)
 
 <img src="docs/img/inicio.png" alt="Página de inicio de Khalifa Barbershop" width="860">
 
@@ -47,7 +47,7 @@ el panel y la versión compilada del sitio.
 
 ## Demo en vivo
 
-**[https://federicoviceconte5-jpg.github.io/khalifa-barbershop/](https://federicoviceconte5-jpg.github.io/khalifa-barbershop/)**
+**[https://federicoviceconte.github.io/khalifa-barbershop/](https://federicoviceconte.github.io/khalifa-barbershop/)**
 
 La demo publica solo el frontend en GitHub Pages, sin backend: las novedades son de ejemplo y el
 formulario de contacto no envía correos, como indica un aviso en pantalla. Se actualiza sola en cada
