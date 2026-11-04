@@ -11,7 +11,8 @@
 ![Node.js](https://img.shields.io/badge/Node.js-22.12+-339933?logo=nodedotjs&logoColor=white)
 ![Express](https://img.shields.io/badge/Express-4-000000?logo=express&logoColor=white)
 ![MySQL](https://img.shields.io/badge/MySQL-4479A1?logo=mysql&logoColor=white)
-![Pruebas](https://img.shields.io/badge/pruebas-11_aprobadas-2ea44f)
+[![Pruebas](https://github.com/federicoviceconte5-jpg/khalifa-barbershop/actions/workflows/ci.yml/badge.svg)](https://github.com/federicoviceconte5-jpg/khalifa-barbershop/actions/workflows/ci.yml)
+[![Demo](https://github.com/federicoviceconte5-jpg/khalifa-barbershop/actions/workflows/pages.yml/badge.svg)](https://github.com/federicoviceconte5-jpg/khalifa-barbershop/actions/workflows/pages.yml)
 
 ### [▶ Ver la demo en vivo](https://federicoviceconte5-jpg.github.io/khalifa-barbershop/)
 
@@ -193,7 +194,7 @@ npm --prefix frontend test   # 6 pruebas: rutas, menú, productos, contacto, mod
 npm --prefix backend test    # 5 pruebas: validación, modo demostración, protección del panel y CSRF
 ```
 
-Las pruebas del backend no necesitan MySQL ni servicios externos.
+Las pruebas del backend no necesitan MySQL ni servicios externos. GitHub Actions corre las 11 pruebas y compila el frontend en cada cambio.
 
 ## Estructura del proyecto
 
