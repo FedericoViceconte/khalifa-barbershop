@@ -1,101 +1,40 @@
-const Productos = (props) => {
-    return (
-        <main className="main">
+import { Link } from 'react-router-dom';
 
+export const productos = [
+  { nombre: 'Patillera Babyliss', imagen: '/img/patillera.png', precio: 20000, descuento: 25, estrellas: 4 },
+  { nombre: 'Espejo de barbería', imagen: '/img/espejo.png', precio: 3080, descuento: 15, estrellas: 3 },
+  { nombre: 'Tijera profesional', imagen: '/img/tijeraa.png', precio: 5820, descuento: 36, estrellas: 5 },
+  { nombre: 'Sillón de barbería', imagen: '/img/sillon.png', precio: 60700, descuento: 45, estrellas: 4 },
+  { nombre: 'Secador de pelo', imagen: '/img/secador.png', precio: 4950, descuento: 10, estrellas: 3 },
+  { nombre: 'Set de barbero profesional', imagen: '/img/set.png', precio: 2120, descuento: 30, estrellas: 5 }
+];
 
+const pesos = new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS', maximumFractionDigits: 0 });
+
+const Productos = () => {
+  return (
+    <main className="main">
       <section className="shop">
         <h2>NUESTROS PRODUCTOS</h2>
-          <div className="card estilo-c">
-            <a href="#">
-              <div className="img-container">
-                <img src="img/patillera.png" alt="producto 1"/>
-                <span className="promo">25% de descuento</span>
-              </div>
-             </a>
+        {productos.map(({ nombre, imagen, precio, descuento, estrellas }) => (
+          <article className="card estilo-c" key={nombre}>
+            <div className="img-container">
+              <img src={imagen} alt={nombre} />
+              <span className="promo">{descuento}% de descuento</span>
+            </div>
             <div className="info-container">
-              <h3>Patillera Babyliss</h3>
-              <strong>$20.000</strong>
-              <span className="rating">★★★★☆</span>
-              <a href="#" className="add-cart">Añadir al carrito</a>
+              <h3>{nombre}</h3>
+              <strong>{pesos.format(precio)}</strong>
+              <span className="rating" role="img" aria-label={`${estrellas} de 5 estrellas`}>
+                {'★'.repeat(estrellas) + '☆'.repeat(5 - estrellas)}
+              </span>
+              <Link to="/contacto" className="add-cart">Consultar</Link>
             </div>
-          </div>
-          <div className="card estilo-c">
-            <a href="#">
-              <div className="img-container">
-                <img src="img/espejo.png" alt="producto 1"/>
-                <span className="promo">15% de descuento</span>
-              </div>
-              </a>
-            <div className="info-container">
-              <h3>Espejo Barberia</h3>
-              <strong>$3.080</strong>
-              <span className="rating">★★★☆☆</span>
-              <a href="#" className="add-cart">Añadir al carrito</a>
-            </div>
-          </div>
-          <div className="card estilo-c">
-            <a href="#">
-              <div className="img-container">
-                <img src="img/tijeraa.png" alt="producto 1"/>
-                <span className="promo">36% de descuento</span>
-              </div>
-              </a>
-            <div className="info-container">
-              <h3>Tijera Profesional</h3>
-              <strong>$5.820</strong>
-              <span className="rating">★★★★★</span>
-              <a href="#" className="add-cart">Añadir al carrito</a>
-            </div>
-          </div>
-          <div className="card estilo-c">
-            <a href="#">
-              <div className="img-container">
-                <img src="img/sillon.png" alt="producto 1"/>
-                <span className="promo">45% de descuento</span>
-              </div>
-             </a>
-            <div className="info-container">
-              <h3>Sillon Barberia</h3>
-              <strong>$60.700</strong>
-              <span className="rating">★★★★☆</span>
-              <a href="#" className="add-cart">Añadir al carrito</a>
-            </div>
-          </div>
-          <div className="card estilo-c">
-            <a href="#">
-              <div className="img-container">
-                <img src="img/secador.png" alt="producto 1"/>
-                <span className="promo">10% de descuento</span>
-              </div>
-              </a>
-            <div className="info-container">
-              <h3>Secador de Pelo</h3>
-              <strong>$4.950</strong>
-              <span className="rating">★★★☆☆</span>
-              <a href="#" className="add-cart">Añadir al carrito</a>
-            </div>
-          </div>
-          <div className="card estilo-c">
-            <a href="#">
-              <div className="img-container">
-                <img src="img/set.png" alt="producto 1"/>
-                <span className="promo">30% de descuento</span>
-              </div>
-              </a>
-            <div className="info-container">
-              <h3>Set barbero Profesional</h3>
-              <strong>$2.120</strong>
-              <span className="rating">★★★★★</span>
-              <a href="#" className="add-cart">Añadir al carrito</a>
-            </div>
-            </div>
+          </article>
+        ))}
       </section>
+    </main>
+  );
+};
 
-
-
-
-</main>
-
-    );
-}
 export default Productos;

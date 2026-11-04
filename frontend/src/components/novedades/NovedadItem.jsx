@@ -1,17 +1,12 @@
-import React from 'react';
-
-const NovedadItem = (props) => {
-    const { tittle, subtitle, imagen, body } = props;
-
-    return (
-        <div className="novedades">
-            <h1>{tittle}</h1>
-            <h2>{subtitle}</h2>
-            {imagen && <img src={imagen} alt="" />}
-            <p>{body}</p>
-            <hr />
-        </div>
-    );
-}
+const NovedadItem = ({ titulo, subtitulo, imagen, cuerpo }) => {
+  return (
+    <article className="novedad">
+      <h3>{titulo}</h3>
+      <h4>{subtitulo}</h4>
+      {imagen && <img src={imagen} alt={titulo} />}
+      <p>{cuerpo}</p>
+    </article>
+  );
+};
 
 export default NovedadItem;

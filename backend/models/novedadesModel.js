@@ -1,47 +1,28 @@
-var pool = require('./bd');
+const pool = require('./bd');
 
 async function getNovedades() {
-    var query = 'select * from novedades';
-    var [rows] = await pool.query(query);
-    return rows;
+  const [rows] = await pool.query('SELECT * FROM novedades ORDER BY id DESC');
+  return rows;
 }
 
-async function insertNovedad(obj) {
-    try {
-        var query = "insert into novedades set ?";
-        var [rows] = await pool.query(query, [obj])
-        return rows;
-
-    } catch (error) {
-        console.log(error);
-        throw error;
-    }
+async function insertNovedad(novedad) {
+  const [result] = await pool.query('INSERT INTO novedades SET ?', [novedad]);
+  return result;
 }
 
 async function deleteNovedadesById(id) {
-    var query = 'delete from novedades where id = ?';
-    var [rows] = await pool.query(query, [id]);
-    return rows;
+  const [result] = await pool.query('DELETE FROM novedades WHERE id = ?', [id]);
+  return result;
 }
 
 async function getNovedadById(id) {
-    var query = 'select * from novedades where id = ? ';
-    var [rows] = await pool.query(query, [id]);
-    return rows [0];
+  const [rows] = await pool.query('SELECT * FROM novedades WHERE id = ?', [id]);
+  return rows[0];
 }
 
-
-async function modificarNovedadById(obj, id) {
-    try {
-        var query = 'update novedades set ? where id=?';
-        var [rows] = await pool.query(query, [obj, id]);
-        return rows;
-    } catch (error) {
-        throw error;
-    }
+async function modificarNovedadById(novedad, id) {
+  const [result] = await pool.query('UPDATE novedades SET ? WHERE id = ?', [novedad, id]);
+  return result;
 }
 
-
-
-
-module.exports = {getNovedades, insertNovedad, deleteNovedadesById, getNovedadById, modificarNovedadById }
+module.exports = { getNovedades, insertNovedad, deleteNovedadesById, getNovedadById, modificarNovedadById };

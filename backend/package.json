@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "create-admin": "node ./bin/create-admin"
+    "create-admin": "node ./bin/create-admin",
+    "test": "node --test"
   },
   "dependencies": {
     "cloudinary": "^2.11.0",
@@ -18,7 +19,7 @@
     "morgan": "^1.12.1",
     "mysql2": "^3.0.0",
     "nodemailer": "^10.3.1",
-    "express-handlebars": "latest"
+    "express-handlebars": "^9.0.4"
   },
   "overrides": {
     "handlebars": "^4.7.10",

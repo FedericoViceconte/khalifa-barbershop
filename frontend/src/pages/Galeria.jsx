@@ -1,38 +1,28 @@
-const Galeria = (props) => {
-    return (
-        <main className="main">
+const fotos = [
+  ['/img/sillon.png', 'Sillón de barbería'],
+  ['/img/espejo.png', 'Espejo de barbería'],
+  ['/img/tijeraa.png', 'Tijera profesional']
+];
 
-    <div className="container-slider">
+const Galeria = () => {
+  return (
+    <main className="main">
+      <div className="container-slider">
         <ul className="slider">
-            <li id="slide1">
-                <img src="img/afeitado.png" alt="Afeitado clásico" />
+          {fotos.map(([imagen, descripcion], i) => (
+            <li id={`slide${i + 1}`} key={imagen}>
+              <img src={imagen} alt={descripcion} />
             </li>
-            <li id="slide2">
-                <img src="img/polo.png" alt="Poste de barbería" />
-            </li>
-            <li id="slide3">
-                <img src="img/tijera.png" alt="Tijeras de barbería" />
-            </li>
+          ))}
         </ul>
-        <ul className="menu">
-            <li>
-                <a href="#slide1">1</a>
-            </li>
-            <li>
-                <a href="#slide2">2</a>
-            </li>
-            <li>
-                <a href="#slide3">3</a>
-            </li>
-
-
+        <ul className="menu" aria-label="Elegir imagen">
+          {fotos.map(([imagen, descripcion], i) => (
+            <li key={imagen}><a href={`#slide${i + 1}`} aria-label={descripcion}>{i + 1}</a></li>
+          ))}
         </ul>
-    </div>
+      </div>
+    </main>
+  );
+};
 
-
-
-</main>
-
-    );
-}
 export default Galeria;
