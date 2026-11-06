@@ -4,10 +4,30 @@ Khalifa Barbershop
 Proyecto académico full stack.
 Titular de los derechos de autor del proyecto: Federico Viceconte.
 
+Este repositorio es público para que el proyecto pueda verse como parte del
+portfolio de su autor. Que el código sea visible no concede ninguna licencia
+sobre él.
+
+Se permite:
+
+- Visitar la demo publicada en GitHub Pages.
+- Ver el código y la documentación en GitHub y hacer un fork dentro de GitHub,
+  según los Términos de Servicio de GitHub para repositorios públicos.
+
+No se permite, sin autorización previa y por escrito del titular:
+
+- Copiar, reproducir, modificar, adaptar o traducir el código, el diseño o la
+  documentación, en todo o en parte.
+- Redistribuir, publicar, vender, alquilar o sublicenciar el proyecto o partes
+  de él, incluidas versiones modificadas.
+- Usarlo en otros proyectos, productos o trabajos académicos, o presentarlo como
+  propio.
+
 Este aviso se aplica al código, el diseño y la documentación originales del
 proyecto en la medida en que sean susceptibles de protección por derechos de
 autor. Las bibliotecas, fuentes, íconos e imágenes de terceros conservan sus
 licencias y derechos. Consultar LICENCIAS.txt.
 
-No se concede una licencia general para redistribuir, vender o modificar el
-proyecto. Cualquier autorización adicional debe solicitarse a Federico Viceconte.
+Para pedir una autorización, contactar a Federico Viceconte por LinkedIn
+(https://www.linkedin.com/in/federico-viceconte/) o abrir un issue en el
+repositorio.
