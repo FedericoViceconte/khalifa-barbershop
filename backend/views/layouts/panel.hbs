@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>{{#if titulo}}{{titulo}} · {{/if}}Panel de Khalifa Barbershop</title>
+  <link rel="icon" type="image/png" href="/images/logo.png">
+  <link rel="stylesheet" href="/panel/panel.css">
+  <script src="/panel/panel.js" defer></script>
+</head>
+<body class="panel">
+  <a class="saltar" href="#contenido">Saltar al contenido</a>
+  <aside class="lateral" id="lateral">
+    <a class="marca" href="/admin/agenda">
+      <img src="/images/logo.png" alt="" width="40" height="40">
+      <span><strong>Khalifa</strong><small>Panel de la barbería</small></span>
+    </a>
+    <nav aria-label="Secciones del panel">
+      <a href="/admin/agenda" {{#if (eq seccion "agenda")}}aria-current="page"{{/if}}>{{> icono nombre="agenda"}} Agenda</a>
+      <a href="/admin/turnos/nuevo" {{#if (eq seccion "turnos")}}aria-current="page"{{/if}}>{{> icono nombre="mas"}} Nuevo turno</a>
+      <a href="/admin/novedades" {{#if (eq seccion "novedades")}}aria-current="page"{{/if}}>{{> icono nombre="novedades"}} Novedades</a>
+      <a href="/admin/cuenta" {{#if (eq seccion "cuenta")}}aria-current="page"{{/if}}>{{> icono nombre="cuenta"}} Mi cuenta</a>
+      <a href="/" target="_blank" rel="noopener">{{> icono nombre="sitio"}} Ver el sitio</a>
+    </nav>
+    <form class="salir" action="/admin/salir" method="post">
+      <input type="hidden" name="csrfToken" value="{{csrfToken}}">
+      <span class="usuario">{{usuario}}</span>
+      <button type="submit" class="boton-icono" title="Cerrar sesión" aria-label="Cerrar sesión">{{> icono nombre="salir"}}</button>
+    </form>
+  </aside>
+  <div class="area">
+    <header class="barra">
+      <button type="button" class="boton-icono menu" aria-controls="lateral" aria-expanded="false" aria-label="Abrir el menú">{{> icono nombre="menu"}}</button>
+      <h1>{{titulo}}</h1>
+    </header>
+    <main id="contenido" class="contenido">
+      {{> aviso}}
+      {{{body}}}
+    </main>
+  </div>
+</body>
+</html>

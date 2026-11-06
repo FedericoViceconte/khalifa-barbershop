@@ -1,3 +1,7 @@
-<h1>{{message}}</h1>
-<h2>{{error.status}}</h2>
-<pre>{{error.stack}}</pre>
+<section class="tarjeta acceso">
+  <img src="/images/logo.png" alt="Khalifa Barbershop" width="72" height="72">
+  <h1>{{titulo}}</h1>
+  <p class="tenue">{{mensaje}}</p>
+  {{#if detalle}}<pre class="detalle">{{detalle}}</pre>{{/if}}
+  <p><a class="boton" href="/">Ir al sitio</a> <a class="boton" href="/admin">Ir al panel</a></p>
+</section>

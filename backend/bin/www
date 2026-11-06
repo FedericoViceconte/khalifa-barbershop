@@ -1,90 +1,35 @@
 #!/usr/bin/env node
+// Arranca el servidor: prepara la base (crea las tablas que falten) y escucha en HOST:PORT.
+const http = require('node:http');
+const app = require('../app');
+const pool = require('../models/bd');
+const { prepararBase } = require('../models/esquema');
 
-/**
- * Module dependencies.
- */
+const port = Number(process.env.PORT) || 3000;
+const host = process.env.HOST || '127.0.0.1';
 
-var app = require('../app');
-var debug = require('debug')('backend:server');
-var http = require('http');
+async function main() {
+  await prepararBase({ intentos: 10 });
+  const server = http.createServer(app);
 
-/**
- * Get port from environment and store in Express.
- */
+  server.on('error', (error) => {
+    if (error.code === 'EADDRINUSE') console.error(`El puerto ${port} ya está en uso.`);
+    else console.error(error);
+    process.exit(1);
+  });
 
-var port = normalizePort(process.env.PORT || '3000');
-app.set('port', port);
+  server.listen(port, host, () => console.log(`Khalifa Barbershop en http://${host}:${port}`));
 
-/**
- * Create HTTP server.
- */
-
-var server = http.createServer(app);
-
-/**
- * Listen on provided port, on all network interfaces.
- */
-
-server.listen(port, process.env.HOST || '127.0.0.1');
-server.on('error', onError);
-server.on('listening', onListening);
-
-/**
- * Normalize a port into a number, string, or false.
- */
-
-function normalizePort(val) {
-  var port = parseInt(val, 10);
-
-  if (isNaN(port)) {
-    // named pipe
-    return val;
-  }
-
-  if (port >= 0) {
-    // port number
-    return port;
-  }
-
-  return false;
-}
-
-/**
- * Event listener for HTTP server "error" event.
- */
-
-function onError(error) {
-  if (error.syscall !== 'listen') {
-    throw error;
-  }
-
-  var bind = typeof port === 'string'
-    ? 'Pipe ' + port
-    : 'Port ' + port;
-
-  // handle specific listen errors with friendly messages
-  switch (error.code) {
-    case 'EACCES':
-      console.error(bind + ' requires elevated privileges');
-      process.exit(1);
-      break;
-    case 'EADDRINUSE':
-      console.error(bind + ' is already in use');
-      process.exit(1);
-      break;
-    default:
-      throw error;
+  // Docker envía SIGTERM al detener el contenedor: se cierran las conexiones antes de salir.
+  for (const senal of ['SIGTERM', 'SIGINT']) {
+    process.once(senal, () => {
+      server.close(() => pool.end().finally(() => process.exit(0)));
+      setTimeout(() => process.exit(0), 5000).unref();
+    });
   }
 }
 
-/**
- * Event listener for HTTP server "listening" event.
- */
-
-function onListening() {
-  var addr = server.address();
-  var bind = typeof addr === 'string'
-    ? 'pipe ' + addr
-    : 'port ' + addr.port;
-  debug('Listening on ' + bind);
-}
+main().catch((error) => {
+  console.error(`No se pudo iniciar: ${error.code || error.message}`);
+  process.exit(1);
+});

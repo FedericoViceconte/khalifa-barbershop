@@ -1,0 +1,47 @@
+<section class="tarjeta formulario-ancho">
+  <p class="tenue">Para reservas por teléfono o clientes que llegan sin turno. Se controla que el barbero no tenga otro turno superpuesto.</p>
+  <form action="/admin/turnos/nuevo" method="post" class="formulario rejilla">
+    <input type="hidden" name="csrfToken" value="{{csrfToken}}">
+    <label>Servicio
+      <select name="servicio" required>
+        {{#each servicios}}
+        <option value="{{id}}" {{elegido @root.valores.servicio id}}>{{nombre}} · {{duracion}} min · {{pesos precio}}</option>
+        {{/each}}
+      </select>
+    </label>
+    <label>Barbero
+      <select name="barbero">
+        <option value="cualquiera" {{elegido valores.barbero "cualquiera"}}>El que esté libre</option>
+        {{#each barberos}}
+        <option value="{{id}}" {{elegido @root.valores.barbero id}}>{{nombre}}</option>
+        {{/each}}
+      </select>
+    </label>
+    <label>Fecha
+      <input type="date" name="fecha" value="{{valores.fecha}}" min="{{hoy}}" required>
+    </label>
+    <label>Hora
+      <select name="hora" required>
+        {{#each horas}}
+        <option value="{{this}}" {{elegido @root.valores.hora this}}>{{this}}</option>
+        {{/each}}
+      </select>
+    </label>
+    <label>Nombre del cliente
+      <input type="text" name="nombre" value="{{valores.nombre}}" maxlength="120" required>
+    </label>
+    <label>Teléfono
+      <input type="tel" name="telefono" value="{{valores.telefono}}" maxlength="30" placeholder="11 2345-6789" required>
+    </label>
+    <label><span>Correo <span class="tenue">(opcional)</span></span>
+      <input type="email" name="email" value="{{valores.email}}" maxlength="254">
+    </label>
+    <label class="completo"><span>Notas <span class="tenue">(opcional)</span></span>
+      <textarea name="notas" maxlength="500" rows="3">{{valores.notas}}</textarea>
+    </label>
+    <div class="completo acciones">
+      <a class="boton" href="/admin/agenda{{#if valores.fecha}}?fecha={{valores.fecha}}{{/if}}">Volver a la agenda</a>
+      <button type="submit" class="boton primario">Reservar turno</button>
+    </div>
+  </form>
+</section>

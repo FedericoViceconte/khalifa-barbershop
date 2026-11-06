@@ -1,0 +1,50 @@
+# Sitio, API y panel con MySQL en un solo comando: docker compose up -d
+# Las claves se leen del archivo .env de esta carpeta (copiá .env.example).
+name: khalifa-barbershop
+
+services:
+  db:
+    image: mysql:8.4
+    environment:
+      MYSQL_DATABASE: khalifa_barbershop
+      MYSQL_USER: khalifa
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:?Definí MYSQL_PASSWORD en .env}
+      MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+    volumes:
+      - datos:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -u khalifa -p\"$$MYSQL_PASSWORD\" --silent"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 30s
+    restart: unless-stopped
+
+  app:
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      MYSQL_HOST: db
+      MYSQL_DB_NAME: khalifa_barbershop
+      MYSQL_USER: khalifa
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      SESSION_SECRET: ${SESSION_SECRET:?Definí SESSION_SECRET en .env, con 32 caracteres o más}
+      SESSION_STORE: mysql
+      COOKIE_SECURE: ${COOKIE_SECURE:-false}
+      TRUST_PROXY: ${TRUST_PROXY:-}
+      ADMIN_USER: ${ADMIN_USER:-}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-}
+      SMTP_HOST: ${SMTP_HOST:-}
+      SMTP_PORT: ${SMTP_PORT:-}
+      SMTP_USER: ${SMTP_USER:-}
+      SMTP_PASS: ${SMTP_PASS:-}
+      CONTACT_EMAIL: ${CONTACT_EMAIL:-}
+      CLOUDINARY_URL: ${CLOUDINARY_URL:-}
+    ports:
+      - "${PUERTO:-3000}:3000"
+    restart: unless-stopped
+
+volumes:
+  datos:

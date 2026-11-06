@@ -1,20 +1,23 @@
-require('dotenv').config();
+#!/usr/bin/env node
+// Crea un administrador: ADMIN_PASSWORD=... npm run create-admin -- usuario
+require('dotenv').config({ path: require('node:path').join(__dirname, '../.env'), quiet: true });
 const pool = require('../models/bd');
-const { hashPassword } = require('../models/usuariosModel');
+const { crearTablas } = require('../models/esquema');
+const { crearUsuario } = require('../models/usuariosModel');
 
 async function main() {
-  const user = process.argv[2];
-  const password = process.env.ADMIN_PASSWORD;
-  if (!user || user.length > 80 || !password || password.length < 12 || password.length > 256) {
-    throw new Error('Indicá un usuario y una variable ADMIN_PASSWORD de entre 12 y 256 caracteres.');
+  const usuario = process.argv[2];
+  if (!usuario || !process.env.ADMIN_PASSWORD) {
+    throw new Error('Indicá el usuario como argumento y la contraseña en la variable ADMIN_PASSWORD.');
   }
-  await pool.execute('INSERT INTO usuarios (usuario, password) VALUES (?, ?)', [
-    user, await hashPassword(password)
-  ]);
-  console.log('Administrador creado.');
+  await crearTablas();
+  await crearUsuario(usuario, process.env.ADMIN_PASSWORD);
+  console.log(`Administrador ${usuario} creado.`);
 }
 
-main().catch((error) => {
-  console.error(error.code || error.message);
-  process.exitCode = 1;
-}).finally(() => pool.end());
+main()
+  .catch((error) => {
+    console.error(error.code === 'ER_DUP_ENTRY' ? 'Ese usuario ya existe.' : error.code || error.message);
+    process.exitCode = 1;
+  })
+  .finally(() => pool.end());

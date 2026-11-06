@@ -1,0 +1,33 @@
+<section class="tarjeta formulario-ancho">
+  <form action="{{#if novedad.id}}/admin/novedades/modificar/{{novedad.id}}{{else}}/admin/novedades/agregar{{/if}}" method="post" enctype="multipart/form-data" class="formulario">
+    <input type="hidden" name="csrfToken" value="{{csrfToken}}">
+    <label>Título
+      <input type="text" name="titulo" value="{{novedad.titulo}}" maxlength="160" required>
+    </label>
+    <label>Subtítulo
+      <input type="text" name="subtitulo" value="{{novedad.subtitulo}}" maxlength="240" required>
+    </label>
+    <label>Texto
+      <textarea name="cuerpo" rows="6" maxlength="10000" required>{{novedad.cuerpo}}</textarea>
+    </label>
+    <fieldset>
+      <legend>Imagen <span class="tenue">(opcional)</span></legend>
+      {{#if novedad.imagen}}
+      <div class="imagen-actual">
+        <img src="{{novedad.imagen}}" alt="Imagen actual" width="80" height="80">
+        <label class="casilla"><input type="checkbox" name="img_delete" value="1"> Quitar la imagen actual</label>
+      </div>
+      {{/if}}
+      {{#if cloudinary}}
+      <input type="file" name="imagen" accept="image/png,image/jpeg,image/webp">
+      <small class="tenue">PNG, JPG o WebP de hasta 4 MB.</small>
+      {{else}}
+      <small class="tenue">Para subir imágenes, configurá <code>CLOUDINARY_URL</code> en el servidor.</small>
+      {{/if}}
+    </fieldset>
+    <div class="acciones">
+      <a class="boton" href="/admin/novedades">Cancelar</a>
+      <button type="submit" class="boton primario">{{#if novedad.id}}Guardar cambios{{else}}Publicar{{/if}}</button>
+    </div>
+  </form>
+</section>

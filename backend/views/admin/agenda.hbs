@@ -1,0 +1,113 @@
+<section class="indicadores" aria-label="Resumen">
+  <article class="indicador">
+    <span>Turnos de hoy</span>
+    <strong>{{resumen.hoy}}</strong>
+  </article>
+  <article class="indicador">
+    <span>Reservados en 7 días</span>
+    <strong>{{resumen.semana}}</strong>
+  </article>
+  <article class="indicador">
+    <span>Facturado en el mes</span>
+    <strong>{{pesos resumen.facturado}}</strong>
+    <small>{{resumen.atendidos}} turnos atendidos</small>
+  </article>
+  <article class="indicador">
+    <span>Ausencias del mes</span>
+    <strong>{{resumen.ausentes}}</strong>
+  </article>
+</section>
+
+<div class="herramientas">
+  <nav class="navegador-fecha" aria-label="Cambiar de día">
+    <a class="boton-icono" href="/admin/agenda?fecha={{anterior}}" aria-label="Día anterior">{{> icono nombre="izquierda"}}</a>
+    <h2>{{fechaLarga fecha}}{{#if esHoy}} <span class="etiqueta">Hoy</span>{{/if}}</h2>
+    <a class="boton-icono" href="/admin/agenda?fecha={{siguiente}}" aria-label="Día siguiente">{{> icono nombre="derecha"}}</a>
+  </nav>
+  <form class="elegir-fecha" action="/admin/agenda" method="get">
+    <label class="oculto" for="fecha">Ir a una fecha</label>
+    <input type="date" id="fecha" name="fecha" value="{{fecha}}" data-enviar-al-cambiar>
+    <button type="submit" class="boton">Ir</button>
+    {{#unless esHoy}}<a class="boton" href="/admin/agenda">Hoy</a>{{/unless}}
+  </form>
+  <a class="boton primario" href="/admin/turnos/nuevo?fecha={{fecha}}">{{> icono nombre="mas"}} Nuevo turno</a>
+</div>
+
+{{#unless abierto}}
+<p class="aviso aviso-info">La barbería atiende de martes a sábado, de 10 a 20 h. Este día está cerrada.</p>
+{{/unless}}
+
+<div class="columnas">
+  {{#each columnas}}
+  <section class="columna" aria-labelledby="barbero-{{id}}">
+    <header>
+      <div>
+        <h3 id="barbero-{{id}}">{{nombre}}</h3>
+        <small class="tenue">{{turnos.length}} {{#if (eq turnos.length 1)}}turno{{else}}turnos{{/if}}</small>
+      </div>
+      {{#if @root.abierto}}
+      <div class="ocupacion" title="Ocupación del día">
+        <progress class="barra-ocupacion" value="{{ocupacion}}" max="100" aria-label="Ocupación del día">{{ocupacion}} %</progress>
+        <small>{{ocupacion}} %</small>
+      </div>
+      {{/if}}
+    </header>
+    {{#each turnos}}
+    <article class="turno estado-{{estado}}">
+      <div class="turno-hora">
+        <strong>{{hora}}</strong>
+        <small>{{fin}}</small>
+      </div>
+      <div class="turno-datos">
+        <p class="turno-cliente">{{nombre}} <span class="insignia insignia-{{estado}}">{{etiqueta}}</span></p>
+        <p class="tenue">{{servicioNombre}} · {{pesos precio}}{{#if (eq origen "panel")}} · cargado en el panel{{/if}}</p>
+        <p><a href="tel:{{telefonoLink}}" class="enlace-telefono">{{> icono nombre="telefono"}} {{telefono}}</a>{{#if email}} · {{email}}{{/if}}</p>
+        {{#if notas}}<p class="notas">“{{notas}}”</p>{{/if}}
+        <p class="tenue codigo">Código {{codigo}}</p>
+      </div>
+      <div class="turno-acciones">
+        {{#if activo}}
+        <form action="/admin/turnos/{{id}}/estado" method="post">
+          <input type="hidden" name="csrfToken" value="{{@root.csrfToken}}">
+          <button name="estado" value="completado" class="boton-icono exito" title="Marcar como atendido" aria-label="Marcar a {{nombre}} como atendido">{{> icono nombre="check"}}</button>
+          <button name="estado" value="ausente" class="boton-icono" title="No vino" aria-label="Marcar que {{nombre}} no vino">{{> icono nombre="x"}}</button>
+          <button name="estado" value="cancelado" class="boton-icono peligro" title="Cancelar el turno" aria-label="Cancelar el turno de {{nombre}}" data-confirmar="¿Cancelar el turno de {{nombre}} de las {{hora}}?">{{> icono nombre="borrar"}}</button>
+        </form>
+        {{else}}
+        <form action="/admin/turnos/{{id}}/estado" method="post">
+          <input type="hidden" name="csrfToken" value="{{@root.csrfToken}}">
+          <button name="estado" value="reservado" class="boton-icono" title="Volver a reservado" aria-label="Volver a reservar el turno de {{nombre}}">{{> icono nombre="deshacer"}}</button>
+        </form>
+        {{/if}}
+      </div>
+    </article>
+    {{else}}
+    <p class="vacio">Sin turnos{{#if @root.abierto}} para este día{{/if}}.</p>
+    {{/each}}
+  </section>
+  {{/each}}
+</div>
+
+<section class="tarjeta proximos" aria-labelledby="titulo-proximos">
+  <h2 id="titulo-proximos">Próximos turnos</h2>
+  {{#if proximos.length}}
+  <table>
+    <thead>
+      <tr><th scope="col">Día</th><th scope="col">Hora</th><th scope="col">Cliente</th><th scope="col">Servicio</th><th scope="col">Barbero</th></tr>
+    </thead>
+    <tbody>
+      {{#each proximos}}
+      <tr>
+        <td><a href="/admin/agenda?fecha={{fecha}}">{{fechaCorta fecha}}</a></td>
+        <td>{{hora}}</td>
+        <td>{{nombre}}</td>
+        <td>{{servicioNombre}}</td>
+        <td>{{barberoNombre}}</td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+  {{else}}
+  <p class="vacio">No hay turnos reservados por delante.</p>
+  {{/if}}
+</section>

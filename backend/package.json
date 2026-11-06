@@ -1,30 +1,28 @@
 {
-  "name": "backend",
-  "version": "0.0.0",
+  "name": "khalifa-barbershop-backend",
+  "version": "2.0.0",
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
     "create-admin": "node ./bin/create-admin",
-    "test": "node --test"
+    "demo": "node ./bin/datos-demo",
+    "test": "node --test \"test/*.test.js\""
   },
   "dependencies": {
     "cloudinary": "^2.11.0",
-    "cookie-parser": "~1.4.4",
-    "debug": "~2.6.9",
-    "dotenv": "^16.0.1",
-    "express": "^4.22.3",
+    "dotenv": "^17.4.2",
+    "express": "^5.3.0",
     "express-fileupload": "^1.5.2",
+    "express-handlebars": "^9.0.4",
+    "express-rate-limit": "^8.7.3",
     "express-session": "^1.19.0",
-    "http-errors": "~1.6.3",
+    "helmet": "^8.3.0",
+    "http-errors": "^2.0.1",
     "morgan": "^1.12.1",
     "mysql2": "^3.0.0",
-    "nodemailer": "^10.3.1",
-    "express-handlebars": "^9.0.4"
+    "nodemailer": "^10.3.1"
   },
-  "overrides": {
-    "handlebars": "^4.7.10",
-    "optimist": {
-      "minimist": "^1.2.8"
-    }
+  "engines": {
+    "node": ">=22.12"
   }
 }

@@ -1,0 +1,20 @@
+<section class="tarjeta formulario-angosto">
+  <h2>Cambiar la contraseña</h2>
+  <p class="tenue">Usá al menos 12 caracteres y no incluyas tu nombre de usuario.</p>
+  <form action="/admin/cuenta" method="post" class="formulario">
+    <input type="hidden" name="csrfToken" value="{{csrfToken}}">
+    <input type="text" name="usuario" value="{{usuario}}" autocomplete="username" hidden>
+    <label>Contraseña actual
+      <input type="password" name="actual" autocomplete="current-password" maxlength="256" required>
+    </label>
+    <label>Contraseña nueva
+      <input type="password" name="nueva" autocomplete="new-password" minlength="12" maxlength="256" required>
+    </label>
+    <label>Repetí la contraseña nueva
+      <input type="password" name="repetida" autocomplete="new-password" minlength="12" maxlength="256" required>
+    </label>
+    <div class="acciones">
+      <button type="submit" class="boton primario">Actualizar contraseña</button>
+    </div>
+  </form>
+</section>

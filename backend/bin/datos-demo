@@ -1,0 +1,75 @@
+#!/usr/bin/env node
+// Carga novedades y turnos de ejemplo para probar el sitio y el panel: npm run demo
+require('dotenv').config({ path: require('node:path').join(__dirname, '../.env'), quiet: true });
+const pool = require('../models/bd');
+const agenda = require('../../shared/agenda.mjs');
+const { crearTablas } = require('../models/esquema');
+const { insertNovedad } = require('../models/novedadesModel');
+const { crearTurno, cambiarEstado, TurnoNoDisponible } = require('../models/turnosModel');
+
+const NOVEDADES = [
+  ['Afeitado italiano', 'El clásico de la casa', 'Dos toallas calientes, una fría, aceites aromáticos y terminación a navaja.'],
+  ['Nuevo horario de verano', 'De martes a sábados, de 10 a 20 h', 'Ampliamos el horario para que puedas reservar tu turno después del trabajo.'],
+  ['Turnos online', 'Reservá desde el celular', 'Elegí servicio, barbero y horario en un minuto. Te damos un código para consultar o cancelar.']
+];
+
+const CLIENTES = [
+  ['Martín Gómez', '11 4521-3398'], ['Lucas Fernández', '11 6230-1187'], ['Tomás Ruiz', '11 3984-5512'],
+  ['Joaquín Díaz', '11 5172-0043'], ['Santiago Sosa', '11 4409-7765'], ['Mateo Álvarez', '11 3361-2290'],
+  ['Nicolás Romero', '11 6618-4471'], ['Federico Torres', '11 5823-9904'], ['Agustín Castro', '11 4177-6632'],
+  ['Bruno Medina', '11 3790-1158'], ['Facundo Herrera', '11 6045-2879'], ['Gonzalo Ríos', '11 5536-8810']
+];
+
+// [días desde hoy, hora, servicio, barbero, estado final]
+const TURNOS = [
+  [0, '10:00', 'corte', 'clasica', 'completado'], [0, '10:30', 'barba', 'moderna', 'completado'],
+  [0, '11:00', 'completo', 'clasica', 'ausente'], [0, '12:00', 'afeitado', 'moderna', 'reservado'],
+  [0, '15:00', 'corte', 'clasica', 'reservado'], [0, '16:30', 'completo', 'moderna', 'reservado'],
+  [0, '18:00', 'barba', 'clasica', 'cancelado'], [1, '10:30', 'corte', 'moderna', 'reservado'],
+  [1, '14:00', 'afeitado', 'clasica', 'reservado'], [2, '11:00', 'completo', 'clasica', 'reservado'],
+  [2, '17:30', 'corte', 'moderna', 'reservado'], [3, '12:30', 'barba', 'moderna', 'reservado']
+];
+
+async function main() {
+  await crearTablas();
+
+  const [[{ novedades }]] = await pool.query('SELECT COUNT(*) AS novedades FROM novedades');
+  if (!Number(novedades)) {
+    for (const [titulo, subtitulo, cuerpo] of NOVEDADES) await insertNovedad({ titulo, subtitulo, cuerpo });
+    console.log(`${NOVEDADES.length} novedades de ejemplo.`);
+  }
+
+  // Los turnos se cargan a partir del próximo día de atención.
+  const ahora = agenda.ahoraEnArgentina();
+  const abiertos = [];
+  for (let dia = 0; abiertos.length < 4; dia++) {
+    const fecha = agenda.sumarDias(ahora.fecha, dia);
+    if (agenda.abre(fecha)) abiertos.push(fecha);
+  }
+
+  let creados = 0;
+  for (const [indice, [dia, hora, servicio, barbero, estado]] of TURNOS.entries()) {
+    const [nombre, telefono] = CLIENTES[indice % CLIENTES.length];
+    try {
+      const turno = await crearTurno(
+        { servicio, barbero, fecha: abiertos[dia], hora, nombre, telefono, origen: indice % 3 ? 'web' : 'panel' },
+        { anticipacion: -24 * 60, plazo: 30 }
+      );
+      if (estado !== 'reservado') {
+        const [[{ id }]] = await pool.query('SELECT id FROM turnos WHERE codigo = ?', [turno.codigo]);
+        await cambiarEstado(id, estado);
+      }
+      creados++;
+    } catch (error) {
+      if (!(error instanceof TurnoNoDisponible)) throw error;
+    }
+  }
+  console.log(`${creados} turnos de ejemplo entre el ${abiertos[0]} y el ${abiertos.at(-1)}.`);
+}
+
+main()
+  .catch((error) => {
+    console.error(error.code || error.message);
+    process.exitCode = 1;
+  })
+  .finally(() => pool.end());

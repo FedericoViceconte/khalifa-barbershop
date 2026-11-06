@@ -1,12 +1,15 @@
-const NovedadItem = ({ titulo, subtitulo, imagen, cuerpo }) => {
-  return (
-    <article className="novedad">
+import { fechaConAnio } from '../../formato';
+
+const NovedadItem = ({ titulo, subtitulo, imagen, cuerpo, fecha }) => (
+  <article className="tarjeta novedad">
+    {imagen && <img src={imagen} alt="" loading="lazy" />}
+    <div className="novedad-texto">
+      {fecha && <time dateTime={fecha}>{fechaConAnio(fecha)}</time>}
       <h3>{titulo}</h3>
-      <h4>{subtitulo}</h4>
-      {imagen && <img src={imagen} alt={titulo} />}
+      <p className="novedad-subtitulo">{subtitulo}</p>
       <p>{cuerpo}</p>
-    </article>
-  );
-};
+    </div>
+  </article>
+);
 
 export default NovedadItem;

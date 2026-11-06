@@ -1,19 +1,17 @@
-<div class="container">
-    <div class="row" style="margin:200px 0">
-        <div class="col">
-            <form action="/admin/login" method="post">
-                <input type="hidden" name="csrfToken" value="{{csrfToken}}">
-             <div class="form-group">
-                <input type="text" class="form-control" placeholder="Usuario" name="usuario">
-             </div>
-             <div class="form-group">
-                <input type="password" class="form-control" placeholder="Password" name="password">
-             </div>
-             <button type="submit" class="btn btn-primary">Ingresar</button>
-             </form>
-             {{#if error}}
-             <p>Usuario y/o contraseña incorrectos</p>
-             {{/if}}
-        </div>
-    </div>
-</div>
+<section class="tarjeta acceso">
+  <img src="/images/logo.png" alt="Khalifa Barbershop" width="88" height="88">
+  <h1>Panel de la barbería</h1>
+  <p class="tenue">Ingresá para ver la agenda y publicar novedades.</p>
+  {{> aviso}}
+  <form action="/admin/login" method="post" class="formulario">
+    <input type="hidden" name="csrfToken" value="{{csrfToken}}">
+    <label>Usuario
+      <input type="text" name="usuario" value="{{usuario}}" autocomplete="username" maxlength="80" required autofocus>
+    </label>
+    <label>Contraseña
+      <input type="password" name="password" autocomplete="current-password" maxlength="256" required>
+    </label>
+    <button type="submit" class="boton primario ancho">Ingresar</button>
+  </form>
+  <a class="volver" href="/">← Volver al sitio</a>
+</section>

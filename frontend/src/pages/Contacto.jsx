@@ -1,11 +1,16 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import Icono from '../components/Icono';
 import { enviarContacto } from '../api';
+import { DIRECCION, HORARIO_TEXTO } from '../datos';
+import { useTitulo } from '../formato';
 
 const initialForm = { nombre: '', email: '', mensaje: '' };
 
 const Contacto = () => {
+  useTitulo('Contacto');
   const [sending, setSending] = useState(false);
-  const [msg, setMsg] = useState('');
+  const [msg, setMsg] = useState({ tipo: '', texto: '' });
   const [formData, setFormData] = useState(initialForm);
 
   const handleChange = (e) => {
@@ -15,45 +20,57 @@ const Contacto = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setMsg('');
+    setMsg({ tipo: '', texto: '' });
     setSending(true);
     try {
-      setMsg((await enviarContacto(formData)).message);
+      setMsg({ tipo: 'exito', texto: (await enviarContacto(formData)).message });
       setFormData(initialForm);
     } catch (error) {
-      setMsg(error.response?.data?.message || 'No se pudo enviar el mensaje.');
+      setMsg({ tipo: 'error', texto: error.response?.data?.message || 'No se pudo enviar el mensaje.' });
     } finally {
       setSending(false);
     }
   };
 
   return (
-    <main className="main">
-      <div className="container-form">
-        <div className="info-form">
-          <h2>Contactanos</h2>
-          <p>
-            ¿Necesitás hablar con nosotros? Estamos para ayudarte. Completá el formulario y nos vamos a
-            comunicar con vos a la brevedad.
-          </p>
-          <p>Dirección: Ciudad Evita, Buenos Aires</p>
-        </div>
+    <main id="contenido" className="pagina">
+      <header className="contenedor cabecera-pagina">
+        <p className="sobretitulo">Contacto</p>
+        <h1>Contactanos</h1>
+        <p>¿Necesitás hablar con nosotros? Completá el formulario y te respondemos a la brevedad.</p>
+      </header>
 
-        <form onSubmit={handleSubmit}>
-          <label className="visually-hidden" htmlFor="nombre">Nombre</label>
+      <div className="contenedor contacto">
+        <form className="tarjeta formulario" onSubmit={handleSubmit}>
+          <label htmlFor="nombre">Nombre</label>
           <input id="nombre" type="text" name="nombre" value={formData.nombre} onChange={handleChange}
-            placeholder="Ingresá tu nombre" className="campo" maxLength={120} autoComplete="name" required />
-          <label className="visually-hidden" htmlFor="email">Correo electrónico</label>
+            maxLength={120} autoComplete="name" required />
+          <label htmlFor="email">Correo electrónico</label>
           <input id="email" type="email" name="email" value={formData.email} onChange={handleChange}
-            placeholder="Ingresá tu correo" className="campo" maxLength={254} autoComplete="email" required />
-          <label className="visually-hidden" htmlFor="mensaje">Mensaje</label>
+            maxLength={254} autoComplete="email" required />
+          <label htmlFor="mensaje">Mensaje</label>
           <textarea id="mensaje" name="mensaje" value={formData.mensaje} onChange={handleChange}
-            placeholder="Ingresá tu mensaje" className="campo" maxLength={3000} required />
-          <button type="submit" disabled={sending} className="btn-enviar">
+            maxLength={3000} rows={6} required />
+          <button type="submit" disabled={sending} className="boton boton-primario">
             {sending ? 'Enviando…' : 'Enviar mensaje'}
           </button>
-          <p className="estado" role="status" aria-live="polite">{msg}</p>
+          <p className={`estado ${msg.tipo ? `mensaje-${msg.tipo}` : ''}`} role="status" aria-live="polite">{msg.texto}</p>
         </form>
+
+        <aside className="contacto-datos">
+          <div className="tarjeta">
+            <Icono nombre="calendario" />
+            <h2>¿Querés un turno?</h2>
+            <p>No hace falta escribirnos: reservalo online y elegí el horario que te quede cómodo.</p>
+            <Link to="/reservar" className="enlace-flecha">Reservar turno <Icono nombre="flecha" medida={16} /></Link>
+          </div>
+          <div className="tarjeta">
+            <Icono nombre="ubicacion" />
+            <h2>Visitanos</h2>
+            <p>{DIRECCION}<br />{HORARIO_TEXTO}</p>
+            <Link to="/ubicacion" className="enlace-flecha">Ver el mapa <Icono nombre="flecha" medida={16} /></Link>
+          </div>
+        </aside>
       </div>
     </main>
   );
